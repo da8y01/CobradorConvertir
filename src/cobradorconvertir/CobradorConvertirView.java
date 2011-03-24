@@ -544,12 +544,12 @@ public class CobradorConvertirView extends FrameView {
 
                 Rutas RUTAS = new Rutas(sFileFull);
 
-                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO"+System.getProperty("line.separator");
+                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
                 String sCurrentProducto = "";
                 String sSufixProducto = "";
                 Enumeration enumRutas = RUTAS.GetVectorRutas().elements();
                 while (enumRutas.hasMoreElements()) {
-                    String sCSVRuta = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO"+System.getProperty("line.separator");
+                    String sCSVRuta = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
                     Ruta ruta = (Ruta) enumRutas.nextElement();
                     Enumeration enumExpendios = ruta.GetVectorExpendios().elements();
                     while (enumExpendios.hasMoreElements()) {
@@ -558,8 +558,8 @@ public class CobradorConvertirView extends FrameView {
                         while (enumFechas.hasMoreElements()) {
                             Fecha fecha = (Fecha) enumFechas.nextElement();
 
-                            sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + System.getProperty("line.separator");
-                            sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + System.getProperty("line.separator");
+                            sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
+                            sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
 
                             sCurrentProducto = ruta.GetProducto();
                         }
@@ -706,14 +706,14 @@ public class CobradorConvertirView extends FrameView {
 
                 RutasConsignatarias RUTAS = new RutasConsignatarias(sFileFull);
 
-                String sCSVFull = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;VALORCOM;FEPAGO;NUMEROF;COBRADO"+System.getProperty("line.separator");
+                String sCSVFull = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;VALORCOM;FEPAGO;NUMEROF;COBRADO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
                 //String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO"+System.getProperty("line.separator");
                 //String sCSVFull = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;FEPAGO;NUMEROF"+System.getProperty("line.separator");
                 String sCurrentProducto = "";
                 String sSufixProducto = "";
                 Enumeration enumRutas = RUTAS.GetVectorRutas().elements();
                 while (enumRutas.hasMoreElements()) {
-                    String sCSVRuta = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;VALORCOM;FEPAGO;NUMEROF;COBRADO"+System.getProperty("line.separator");
+                    String sCSVRuta = "EMPLEADO;ZONARUTA;NOMBRE;NOMPU;RAZONSOC;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;VALORUNITA;VALORCOM;FEPAGO;NUMEROF;COBRADO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
                     RutaConsignatarias ruta = (RutaConsignatarias) enumRutas.nextElement();
                     Enumeration enumRazonesSociales = ruta.GetVectorRazonSocial().elements();
                     while (enumRazonesSociales.hasMoreElements()) {
@@ -725,8 +725,8 @@ public class CobradorConvertirView extends FrameView {
                             while (enumFechas.hasMoreElements()) {
                                 FechaConsignatarias fecha = (FechaConsignatarias) enumFechas.nextElement();
 
-                                sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + ruta.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetCompendio() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + ";" + fecha.GetCobrado() + System.getProperty("line.separator");
-                                sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + ruta.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetCompendio() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + ";" + fecha.GetCobrado() + System.getProperty("line.separator");
+                                sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + ruta.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetCompendio() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + ";" + fecha.GetCobrado() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
+                                sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + razonsocial.GetZona() + ";" + razonsocial.GetNombreRuta() + ";" + ruta.GetProducto() + ";" + razonsocial.GetConsignataria() + ";" + razonsocial.GetCodigo() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetValorUnitario() + ";" + factura.GetCompendio() + ";" + factura.GetFechaPago() + ";" + factura.GetNoFactura() + ";" + fecha.GetCobrado() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
 
                                 sCurrentProducto = ruta.GetProducto();
                             }
@@ -988,7 +988,11 @@ public class CobradorConvertirView extends FrameView {
                             fecha.SetValorUnitario(iFechaValorUnitario);
                         }
 
+                        fecha.SetAdicionales(0);
+                        fecha.SetRestantes(0);
+
                         fecha.SetVisitado(0);
+                        fecha.SetEntrego(0);
 
                         vFechas.add(fecha);
 
@@ -1243,7 +1247,11 @@ public class CobradorConvertirView extends FrameView {
                                 fechaconsignatarias.SetValorUnitario(iFechaValorUnitario);
                             }
 
+                            fechaconsignatarias.SetAdicionales(0);
+                            fechaconsignatarias.SetRestantes(0);
+
                             fechaconsignatarias.SetVisitado(0);
+                            fechaconsignatarias.SetEntrego(0);
 
                             vFechas.add(fechaconsignatarias);
 

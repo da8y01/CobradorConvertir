@@ -13,6 +13,8 @@ public class FechaConsignatarias {
 
     private String Fecha;
     private int Entregados;
+    private int Adicionales;
+    private int Restantes;
     private int Devueltos;
     private int EjemVend;
     private int Faltantes;
@@ -21,6 +23,7 @@ public class FechaConsignatarias {
     private int ValorTotal;
     private int Visitado;
     private int Cobrado;
+    private int Entrego;
 
 
     public FechaConsignatarias() {
@@ -43,6 +46,24 @@ public class FechaConsignatarias {
 
     public void SetEntregados(int entregados) {
         this.Entregados = entregados;
+    }
+
+
+    public int GetAdicionales() {
+        return this.Adicionales;
+    }
+
+    public void SetAdicionales(int adicionales) {
+        this.Adicionales = adicionales;
+    }
+
+
+    public int GetRestantes() {
+        return this.Restantes;
+    }
+
+    public void SetRestantes(int restantes) {
+        this.Restantes = restantes;
     }
 
 
@@ -115,6 +136,15 @@ public class FechaConsignatarias {
 
     public void SetCobrado(int cobrado) {
         this.Cobrado = cobrado;
+    }
+
+
+    public int GetEntrego() {
+        return this.Entrego;
+    }
+
+    public void SetEntrego(int entrego) {
+        this.Entrego = entrego;
     }
 
 }

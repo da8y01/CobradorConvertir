@@ -90,6 +90,14 @@ public class RutasConsignatarias {
                                                 //}
                                                 fechaconsignatarias.SetEntregados(iEntregados);
 
+                                                int iAdicionales = 0;
+                                                iAdicionales = joFecha.getInt("ADICIONALES");
+                                                fechaconsignatarias.SetAdicionales(iAdicionales);
+
+                                                int iRestantes = 0;
+                                                iRestantes = joFecha.getInt("RESTANTES");
+                                                fechaconsignatarias.SetRestantes(iRestantes);
+
                                                 int iDevueltos = 0;
                                                 //String sDevueltos = (String) joFecha.get("DEVUELTOS");
                                                 iDevueltos = joFecha.getInt("DEVOL");
@@ -129,6 +137,8 @@ public class RutasConsignatarias {
                                                 fechaconsignatarias.SetVisitado(joFecha.getInt("VISITADO"));
 
                                                 fechaconsignatarias.SetCobrado(joFecha.getInt("COBRADO"));
+
+                                                fechaconsignatarias.SetEntrego(joFecha.getInt("ENTREGO"));
 
                                                 vFechas.addElement(fechaconsignatarias);
                                             }
@@ -252,6 +262,8 @@ public class RutasConsignatarias {
                             JSONObject joFecha = new JSONObject();
                             joFecha.put("FECHA", fechaconsignatarias.GetFecha());
                             joFecha.put("ENTR", fechaconsignatarias.GetEntregados());
+                            joFecha.put("ADICIONALES", fechaconsignatarias.GetAdicionales());
+                            joFecha.put("RESTANTES", fechaconsignatarias.GetRestantes());
                             joFecha.put("DEVOL", fechaconsignatarias.GetDevueltos());
                             joFecha.put("EJEMVEND", fechaconsignatarias.GetEjemVend());
                             joFecha.put("FALTANTES", fechaconsignatarias.GetFaltantes());
@@ -260,6 +272,7 @@ public class RutasConsignatarias {
                             joFecha.put("VALORTOTAL", fechaconsignatarias.GetValorTotal());
                             joFecha.put("VISITADO", fechaconsignatarias.GetVisitado());
                             joFecha.put("COBRADO", fechaconsignatarias.GetCobrado());
+                            joFecha.put("ENTREGO", fechaconsignatarias.GetEntrego());
 
                             jaFechas.put(joFecha);
                         }

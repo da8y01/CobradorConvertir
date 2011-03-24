@@ -85,6 +85,14 @@ public class Rutas {
                                         //}
                                         fecha.SetEntregados(iEntregados);
 
+                                        int iAdicionales = 0;
+                                        iAdicionales = joFecha.getInt("ADICIONALES");
+                                        fecha.SetAdicionales(iAdicionales);
+
+                                        int iRestantes = 0;
+                                        iRestantes = joFecha.getInt("RESTANTES");
+                                        fecha.SetRestantes(iRestantes);
+
                                         int iDevueltos = 0;
                                         //String sDevueltos = (String) joFecha.get("DEVUELTOS");
                                         iDevueltos = joFecha.getInt("DEVUELTOS");
@@ -128,6 +136,8 @@ public class Rutas {
                                         fecha.SetVisitado(joFecha.getInt("VISITADO"));
 
                                         fecha.SetCobrado(joFecha.getInt("COBRADO"));
+
+                                        fecha.SetEntrego(joFecha.getInt("ENTREGO"));
 
                                         vFechas.addElement(fecha);
                                     }
@@ -223,6 +233,8 @@ public class Rutas {
                         JSONObject joFecha = new JSONObject();
                         joFecha.put("FECHA", fecha.GetFecha());
                         joFecha.put("ENTREGADOS", fecha.GetEntregados());
+                        joFecha.put("ADICIONALES", fecha.GetAdicionales());
+                        joFecha.put("RESTANTES", fecha.GetRestantes());
                         joFecha.put("DEVUELTOS", fecha.GetDevueltos());
                         joFecha.put("FALTANTES", fecha.GetFaltantes());
                         joFecha.put("SOBRANTES", fecha.GetSobrantes());
@@ -230,6 +242,7 @@ public class Rutas {
                         joFecha.put("VALOR", fecha.GetValor());
                         joFecha.put("VISITADO", fecha.GetVisitado());
                         joFecha.put("COBRADO", fecha.GetCobrado());
+                        joFecha.put("ENTREGO", fecha.GetEntrego());
 
                         jaFechas.put(joFecha);
                     }

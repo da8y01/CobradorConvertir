@@ -13,6 +13,8 @@ public class Fecha {
 
     private String Fecha;
     private int Entregados;
+    private int Adicionales;
+    private int Restantes;
     private int Devueltos;
     private int Faltantes;
     private int Sobrantes;
@@ -20,6 +22,7 @@ public class Fecha {
     private int Valor;
     private int Visitado;
     private int Cobrado;
+    private int Entrego;
 
 
     public Fecha() {
@@ -42,6 +45,24 @@ public class Fecha {
 
     public void SetEntregados(int entregados) {
         this.Entregados = entregados;
+    }
+
+
+    public int GetAdicionales() {
+        return this.Adicionales;
+    }
+
+    public void SetAdicionales(int adicionales) {
+        this.Adicionales = adicionales;
+    }
+
+
+    public int GetRestantes() {
+        return this.Restantes;
+    }
+
+    public void SetRestantes(int restantes) {
+        this.Restantes = restantes;
     }
 
 
@@ -105,6 +126,15 @@ public class Fecha {
 
     public void SetCobrado(int cobrado) {
         this.Cobrado = cobrado;
+    }
+
+
+    public int GetEntrego() {
+        return this.Entrego;
+    }
+
+    public void SetEntrego(int entrego) {
+        this.Entrego = entrego;
     }
 
 }

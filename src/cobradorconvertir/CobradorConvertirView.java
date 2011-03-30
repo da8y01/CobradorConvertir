@@ -566,7 +566,7 @@ public class CobradorConvertirView extends FrameView {
                     }
 
 
-                    if (sCurrentProducto.equalsIgnoreCase("LA PATRIA")) {
+                    if (sCurrentProducto.equalsIgnoreCase("LA PATRIA") || sCurrentProducto.equalsIgnoreCase("PATRIA")) {
                         sSufixProducto = "_LP";
                     }
                     if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO")) {
@@ -733,7 +733,7 @@ public class CobradorConvertirView extends FrameView {
                         }
                     }
 
-                    if (sCurrentProducto.equalsIgnoreCase("LA PATRIA")) {
+                    if (sCurrentProducto.equalsIgnoreCase("LA PATRIA") || sCurrentProducto.equalsIgnoreCase("PATRIA")) {
                         sSufixProducto = "_LP";
                     }
                     if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO")) {
@@ -819,6 +819,8 @@ public class CobradorConvertirView extends FrameView {
     private String sMessages;
     private boolean bSuccess;
 
+    private boolean bEsEntregar = false;
+
 
     private void SetMessages(String sMsg) {
         this.sMessages = sMsg;
@@ -838,6 +840,15 @@ public class CobradorConvertirView extends FrameView {
     }
 
 
+    public boolean GetEsEntregar() {
+        return this.bEsEntregar;
+    }
+
+    public void SetEsEntregar(boolean esentregar) {
+        this.bEsEntregar = esentregar;
+    }
+
+
     private Rutas ParseCSV(String sCSVFile) {
         int contador = 0;
         Rutas rutas = new Rutas();
@@ -853,6 +864,17 @@ public class CobradorConvertirView extends FrameView {
         try {
             CSVReader reader = new CSVReader(new FileReader(sCSVFile), ';');
             String[] nextLine = reader.readNext();
+            String sColumnaPrueba = "";
+            //String sColumnaPrueba = nextLine[17];
+            try {
+                sColumnaPrueba = nextLine[17];
+                SetEsEntregar(true);
+            } catch (ArrayIndexOutOfBoundsException aioobex) {
+                SetEsEntregar(false);
+                SetMessages(aioobex.toString());
+                aioobex.printStackTrace();
+            }
+
             String sCobradorAnt = "";
             String sCobrador = "";
             String a_line = "";
@@ -957,7 +979,15 @@ public class CobradorConvertirView extends FrameView {
                             fecha.SetEntregados(0);
                         }
                         else {
-                            int iFechaEntregados = Integer.parseInt(sFechaEntregados);
+                            int iFechaEntregados = 0;
+                            try {
+                                iFechaEntregados = Integer.parseInt(sFechaEntregados);
+                            }
+                            catch(NumberFormatException nfex) {
+                                iFechaEntregados = 0;
+                                SetMessages(nfex.toString());
+                                nfex.printStackTrace();
+                            }
                             fecha.SetEntregados(iFechaEntregados);
                         }
 
@@ -966,7 +996,15 @@ public class CobradorConvertirView extends FrameView {
                             fecha.SetDevueltos(0);
                         }
                         else {
-                            int iFechaDevueltos = Integer.parseInt(sFechaDevueltos);
+                            int iFechaDevueltos = 0;
+                            try {
+                                iFechaDevueltos = Integer.parseInt(sFechaDevueltos);
+                            }
+                            catch(NumberFormatException nfex) {
+                                iFechaDevueltos = 0;
+                                SetMessages(nfex.toString());
+                                nfex.printStackTrace();
+                            }
                             fecha.SetDevueltos(iFechaDevueltos);
                         }
 
@@ -975,7 +1013,15 @@ public class CobradorConvertirView extends FrameView {
                             fecha.SetFaltantes(0);
                         }
                         else {
-                            int iFechaFaltantes = Integer.parseInt(sFechaFaltantes);
+                            int iFechaFaltantes = 0;
+                            try {
+                                iFechaFaltantes = Integer.parseInt(sFechaFaltantes);
+                            }
+                            catch(NumberFormatException nfex) {
+                                iFechaFaltantes = 0;
+                                SetMessages(nfex.toString());
+                                nfex.printStackTrace();
+                            }
                             fecha.SetFaltantes(iFechaFaltantes);
                         }
 
@@ -984,7 +1030,15 @@ public class CobradorConvertirView extends FrameView {
                             fecha.SetValorUnitario(0);
                         }
                         else {
-                            int iFechaValorUnitario = Integer.parseInt(sFechaValorUnitario);
+                            int iFechaValorUnitario = 0;
+                            try {
+                                iFechaValorUnitario = Integer.parseInt(sFechaValorUnitario);
+                            }
+                            catch(NumberFormatException nfex) {
+                                iFechaValorUnitario = 0;
+                                SetMessages(nfex.toString());
+                                nfex.printStackTrace();
+                            }
                             fecha.SetValorUnitario(iFechaValorUnitario);
                         }
 
@@ -1037,11 +1091,8 @@ public class CobradorConvertirView extends FrameView {
             }
 
             rutas.SetVectorRutas(vRutas);
-            System.out.println("--OUTPUT RUTAS START--");
-            System.out.println(rutas.JSONObjectToString());
-            System.out.println("--OUTPUT RUTAS END--");
 
-            System.out.println("END");
+            System.out.println(rutas.JSONObjectToString());
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1069,6 +1120,17 @@ public class CobradorConvertirView extends FrameView {
 
             CSVReader reader = new CSVReader(new FileReader(sCSVFile), ';');
             String[] nextLine = reader.readNext();
+            String sColumnaPrueba = "";
+            //String sColumnaPrueba = nextLine[16];
+            try {
+                sColumnaPrueba = nextLine[16];
+                SetEsEntregar(true);
+            } catch (ArrayIndexOutOfBoundsException aioobex) {
+                SetEsEntregar(false);
+                SetMessages(aioobex.toString());
+                aioobex.printStackTrace();
+            }
+
             String sCobradorAnt = "";
             String sCobrador = "";
             String a_line = "";
@@ -1217,7 +1279,15 @@ public class CobradorConvertirView extends FrameView {
                             if (sFechaEntregas == null || sFechaEntregas.equalsIgnoreCase("")) {
                                 fechaconsignatarias.SetEntregados(0);
                             } else {
-                                int iFechaEntregas = Integer.parseInt(sFechaEntregas);
+                                int iFechaEntregas = 0;
+                                try {
+                                    iFechaEntregas = Integer.parseInt(sFechaEntregas);
+                                }
+                                catch (NumberFormatException nfex) {
+                                    iFechaEntregas = 0;
+                                    SetMessages(nfex.toString());
+                                    nfex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetEntregados(iFechaEntregas);
                             }
 
@@ -1225,7 +1295,15 @@ public class CobradorConvertirView extends FrameView {
                             if (sFechaDevolucion == null || sFechaDevolucion.equalsIgnoreCase("")) {
                                 fechaconsignatarias.SetDevueltos(0);
                             } else {
-                                int iFechaDevolucion = Integer.parseInt(sFechaDevolucion);
+                                int iFechaDevolucion = 0;
+                                try {
+                                    iFechaDevolucion = Integer.parseInt(sFechaDevolucion);
+                                }
+                                catch (NumberFormatException nfex) {
+                                    iFechaDevolucion = 0;
+                                    SetMessages(nfex.toString());
+                                    nfex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetDevueltos(iFechaDevolucion);
                             }
 
@@ -1233,7 +1311,15 @@ public class CobradorConvertirView extends FrameView {
                             if (sFechaFaltantes == null || sFechaFaltantes.equalsIgnoreCase("")) {
                                 fechaconsignatarias.SetFaltantes(0);
                             } else {
-                                int iFechaFaltantes = Integer.parseInt(sFechaFaltantes);
+                                int iFechaFaltantes = 0;
+                                try {
+                                    iFechaFaltantes = Integer.parseInt(sFechaFaltantes);
+                                }
+                                catch (NumberFormatException nfex) {
+                                    iFechaFaltantes = 0;
+                                    SetMessages(nfex.toString());
+                                    nfex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetFaltantes(iFechaFaltantes);
                             }
 
@@ -1243,7 +1329,15 @@ public class CobradorConvertirView extends FrameView {
                             if (sFechaValorUnitario == null || sFechaValorUnitario.equalsIgnoreCase("")) {
                                 fechaconsignatarias.SetValorUnitario(0);
                             } else {
-                                int iFechaValorUnitario = Integer.parseInt(sFechaValorUnitario);
+                                int iFechaValorUnitario = 0;
+                                try {
+                                    iFechaValorUnitario = Integer.parseInt(sFechaValorUnitario);
+                                }
+                                catch (NumberFormatException nfex) {
+                                    iFechaValorUnitario = 0;
+                                    SetMessages(nfex.toString());
+                                    nfex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetValorUnitario(iFechaValorUnitario);
                             }
 
@@ -1257,6 +1351,9 @@ public class CobradorConvertirView extends FrameView {
 
 
                             sFacturaNumeroF = nextLineFactura[15];
+                            if (sFacturaNumeroF == null || sFacturaNumeroF.equalsIgnoreCase("")) {
+                                sFacturaNumeroF = "0";
+                            }
 
                             sRazonSocialNombreRuta = nextLineFactura[2];
 
@@ -1321,11 +1418,8 @@ public class CobradorConvertirView extends FrameView {
             }
 
             rutas.SetVectorRutas(vRutas);
-            System.out.println("--OUTPUT RUTAS START--");
+            
             System.out.println(rutas.JSONObjectToString());
-            System.out.println("--OUTPUT RUTAS END--");
-
-            System.out.println("END");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -1337,8 +1431,16 @@ public class CobradorConvertirView extends FrameView {
     private boolean WriteJSONCobradorFile(Rutas rutas, String sAbsoluteDestination, int iContador) {
         try {
             JSONObject joOriginal = new JSONObject(rutas.JSONObjectToString());
-            String sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("COBRAD"+iContador+".json");
-            //String sFinalFileName = sAbsoluteDestination + ("COBRAD"+iContador+".json");
+            
+            //String sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("COBRAD"+iContador+".json");
+            String sFinalFileName = "";
+            if (GetEsEntregar()) {
+                sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("EXPENT"+iContador+".json");
+            }
+            else {
+                sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("EXPCOB"+iContador+".json");
+            }
+            
             BufferedWriter out = new BufferedWriter(new FileWriter(sFinalFileName));
             out.write(joOriginal.toString());
             out.close();
@@ -1365,8 +1467,16 @@ public class CobradorConvertirView extends FrameView {
     private boolean WriteJSONCobradorFileConsignatarias(RutasConsignatarias rutasconsignatarias, String sAbsoluteDestination, int iContador) {
         try {
             JSONObject joOriginal = new JSONObject(rutasconsignatarias.JSONObjectToString());
-            String sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("CONSIG"+iContador+".json");
-            //String sFinalFileName = sAbsoluteDestination + ("COBRAD"+iContador+".json");
+
+            //String sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("CONSIG"+iContador+".json");
+            String sFinalFileName = "";
+            if (GetEsEntregar()) {
+                sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("CONENT"+iContador+".json");
+            }
+            else {
+                sFinalFileName = sAbsoluteDestination + System.getProperty("file.separator") + ("CONCOB"+iContador+".json");
+            }
+            
             BufferedWriter out = new BufferedWriter(new FileWriter(sFinalFileName));
             out.write(joOriginal.toString());
             out.close();

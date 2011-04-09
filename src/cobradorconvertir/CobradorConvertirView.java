@@ -545,13 +545,13 @@ public class CobradorConvertirView extends FrameView {
                 Rutas RUTAS = new Rutas(sFileFull);
 
                 //String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
-                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAING;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FECHAMOV;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
+                String sCSVFull = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAING;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FECHAMOV;ADICIONA;RESTANTE;ENTREGO;FECHAPLA"+System.getProperty("line.separator");
                 String sCurrentProducto = "";
                 String sSufixProducto = "";
                 Enumeration enumRutas = RUTAS.GetVectorRutas().elements();
                 while (enumRutas.hasMoreElements()) {
                     //String sCSVRuta = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAMOV;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FEPAGO;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
-                    String sCSVRuta = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAING;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FECHAMOV;ADICIONA;RESTANTE;ENTREGO"+System.getProperty("line.separator");
+                    String sCSVRuta = "EMPLEADO;ZONARUTA;RAZONSOC;DIRECCION;CODIGOCLI;FECHAING;ENTREGAS;DEVOLUCION;FALTANTES;SOBRANTES;VALORUNITA;COBRADO;VALORFEC;VALORCOM;NOMPU;FECHAMOV;ADICIONA;RESTANTE;ENTREGO;FECHAPLA"+System.getProperty("line.separator");
                     Ruta ruta = (Ruta) enumRutas.nextElement();
                     Enumeration enumExpendios = ruta.GetVectorExpendios().elements();
                     while (enumExpendios.hasMoreElements()) {
@@ -560,8 +560,8 @@ public class CobradorConvertirView extends FrameView {
                         while (enumFechas.hasMoreElements()) {
                             Fecha fecha = (Fecha) enumFechas.nextElement();
 
-                            sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
-                            sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + System.getProperty("line.separator");
+                            sCSVFull = sCSVFull + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + ";" + ruta.GetFechaPlanilla() + System.getProperty("line.separator");
+                            sCSVRuta = sCSVRuta + ruta.GetCobrador() + ";" + ruta.GetZona() + ";" + expendio.GetNombre() + ";" + expendio.GetDireccion() + ";" + expendio.GetCodigoCliente() + ";" + fecha.GetFecha() + ";" + fecha.GetEntregados() + ";" + fecha.GetDevueltos() + ";" + fecha.GetFaltantes() + ";" + fecha.GetSobrantes() + ";" + fecha.GetValorUnitario() + ";" + fecha.GetCobrado() + ";" + fecha.GetValor() + ";" + expendio.GetCompendio() + ";" + ruta.GetProducto() + ";" + ruta.GetFecha() + ";" + fecha.GetAdicionales() + ";" + fecha.GetRestantes() + ";" + fecha.GetEntrego() + ";" + ruta.GetFechaPlanilla() + System.getProperty("line.separator");
 
                             sCurrentProducto = ruta.GetProducto();
                         }
@@ -571,11 +571,14 @@ public class CobradorConvertirView extends FrameView {
                     if (sCurrentProducto.equalsIgnoreCase("LA PATRIA") || sCurrentProducto.equalsIgnoreCase("PATRIA")) {
                         sSufixProducto = "_LP";
                     }
-                    if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO")) {
+                    if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO") || sCurrentProducto.equalsIgnoreCase("N. ESTADIO")) {
                         sSufixProducto = "_NE";
                     }
                     if (sCurrentProducto.equalsIgnoreCase("QHUBO") || sCurrentProducto.equalsIgnoreCase("Q HUBO")) {
                         sSufixProducto = "_QH";
+                    }
+                    if (sCurrentProducto.equalsIgnoreCase("NUESTRO DIARIO")) {
+                        sSufixProducto = "_ND";
                     }
 
                     String sFullName = fSelected.getAbsolutePath();
@@ -738,11 +741,14 @@ public class CobradorConvertirView extends FrameView {
                     if (sCurrentProducto.equalsIgnoreCase("LA PATRIA") || sCurrentProducto.equalsIgnoreCase("PATRIA")) {
                         sSufixProducto = "_LP";
                     }
-                    if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO")) {
+                    if (sCurrentProducto.equalsIgnoreCase("NUEVO ESTADIO") || sCurrentProducto.equalsIgnoreCase("N. ESTADIO")) {
                         sSufixProducto = "_NE";
                     }
                     if (sCurrentProducto.equalsIgnoreCase("QHUBO") || sCurrentProducto.equalsIgnoreCase("Q HUBO")) {
                         sSufixProducto = "_QH";
+                    }
+                    if (sCurrentProducto.equalsIgnoreCase("NUESTRO DIARIO")) {
+                        sSufixProducto = "_ND";
                     }
 
                     String sFullName = fSelected.getAbsolutePath();
@@ -866,15 +872,23 @@ public class CobradorConvertirView extends FrameView {
         try {
             CSVReader reader = new CSVReader(new FileReader(sCSVFile), ';');
             String[] nextLine = reader.readNext();
+
+            String sRutaFechaPlanilla = "";
+
             String sColumnaPrueba = "";
             //String sColumnaPrueba = nextLine[17];
             try {
-                sColumnaPrueba = nextLine[17];
+                //sColumnaPrueba = nextLine[17];
+                sColumnaPrueba = nextLine[20];
                 SetEsEntregar(true);
             } catch (ArrayIndexOutOfBoundsException aioobex) {
                 SetEsEntregar(false);
                 SetMessages(aioobex.toString());
                 aioobex.printStackTrace();
+            } catch (Exception ex) {
+                SetEsEntregar(false);
+                SetMessages(ex.toString());
+                ex.printStackTrace();
             }
 
             String sCobradorAnt = "";
@@ -885,6 +899,17 @@ public class CobradorConvertirView extends FrameView {
             while ((nextLine = reader.readNext()) != null) {
                 // nextLine[] is an array of values from the line
                 //System.out.println(nextLine[0] + nextLine[1] + "etc...");
+                
+                if (GetEsEntregar()) {
+                    String sNextLine = nextLine[20];
+                    if (sNextLine==null || sNextLine.equalsIgnoreCase("")) {
+                        sRutaFechaPlanilla = "0";
+                    }
+                    else {
+                        sRutaFechaPlanilla = sNextLine;
+                    }
+                }
+
                 a_line = "";
                 for (int i = 0; i < nextLine.length; i++) {
                     a_line = a_line + nextLine[i] + ";";
@@ -902,6 +927,11 @@ public class CobradorConvertirView extends FrameView {
                     sFull = sFull + a_line + System.getProperty("line.separator");
                 }
             }
+
+
+            /*if (GetEsEntregar()) {
+                sRutaFechaPlanilla = nextLine[20];
+            }*/
 
             String[] splitEmpleado = sFull.split("\\|\\|-empl-\\|\\|");
             System.out.println("splitted.length: " + splitEmpleado.length);
@@ -970,7 +1000,13 @@ public class CobradorConvertirView extends FrameView {
 
                         String sFechaFecha = nextLineExpendio[9];
                         if (sFechaFecha==null || sFechaFecha.equalsIgnoreCase("")) {
-                            fecha.SetFecha("");
+                            //fecha.SetFecha("");
+                            if (GetEsEntregar()) {
+                                fecha.SetFecha(sRutaFechaPlanilla);
+                            }
+                            else {
+                                fecha.SetFecha("0");
+                            }
                         }
                         else {
                             fecha.SetFecha(sFechaFecha);
@@ -990,6 +1026,11 @@ public class CobradorConvertirView extends FrameView {
                                 SetMessages(nfex.toString());
                                 nfex.printStackTrace();
                             }
+                            catch(Exception ex) {
+                                iFechaEntregados = 0;
+                                SetMessages(ex.toString());
+                                ex.printStackTrace();
+                            }
                             fecha.SetEntregados(iFechaEntregados);
                         }
 
@@ -1006,6 +1047,11 @@ public class CobradorConvertirView extends FrameView {
                                 iFechaDevueltos = 0;
                                 SetMessages(nfex.toString());
                                 nfex.printStackTrace();
+                            }
+                            catch(Exception ex) {
+                                iFechaDevueltos = 0;
+                                SetMessages(ex.toString());
+                                ex.printStackTrace();
                             }
                             fecha.SetDevueltos(iFechaDevueltos);
                         }
@@ -1024,6 +1070,11 @@ public class CobradorConvertirView extends FrameView {
                                 SetMessages(nfex.toString());
                                 nfex.printStackTrace();
                             }
+                            catch(Exception ex) {
+                                iFechaFaltantes = 0;
+                                SetMessages(ex.toString());
+                                ex.printStackTrace();
+                            }
                             fecha.SetFaltantes(iFechaFaltantes);
                         }
 
@@ -1040,6 +1091,11 @@ public class CobradorConvertirView extends FrameView {
                                 iFechaValorUnitario = 0;
                                 SetMessages(nfex.toString());
                                 nfex.printStackTrace();
+                            }
+                            catch(Exception ex) {
+                                iFechaValorUnitario = 0;
+                                SetMessages(ex.toString());
+                                ex.printStackTrace();
                             }
                             fecha.SetValorUnitario(iFechaValorUnitario);
                         }
@@ -1071,6 +1127,8 @@ public class CobradorConvertirView extends FrameView {
                 ruta.SetCobrador(sEmpleadoNombre);
                 ruta.SetProducto(sRutaProducto);
                 ruta.SetZona(sRutaZona);
+
+                ruta.SetFechaPlanilla(sRutaFechaPlanilla);
 
                 // (1) get today's date
                 Date today = Calendar.getInstance().getTime();
@@ -1131,6 +1189,10 @@ public class CobradorConvertirView extends FrameView {
                 SetEsEntregar(false);
                 SetMessages(aioobex.toString());
                 aioobex.printStackTrace();
+            } catch (Exception ex) {
+                SetEsEntregar(false);
+                SetMessages(ex.toString());
+                ex.printStackTrace();
             }
 
             String sCobradorAnt = "";
@@ -1290,6 +1352,11 @@ public class CobradorConvertirView extends FrameView {
                                     SetMessages(nfex.toString());
                                     nfex.printStackTrace();
                                 }
+                                catch (Exception ex) {
+                                    iFechaEntregas = 0;
+                                    SetMessages(ex.toString());
+                                    ex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetEntregados(iFechaEntregas);
                             }
 
@@ -1306,6 +1373,11 @@ public class CobradorConvertirView extends FrameView {
                                     SetMessages(nfex.toString());
                                     nfex.printStackTrace();
                                 }
+                                catch (Exception ex) {
+                                    iFechaDevolucion = 0;
+                                    SetMessages(ex.toString());
+                                    ex.printStackTrace();
+                                }
                                 fechaconsignatarias.SetDevueltos(iFechaDevolucion);
                             }
 
@@ -1321,6 +1393,11 @@ public class CobradorConvertirView extends FrameView {
                                     iFechaFaltantes = 0;
                                     SetMessages(nfex.toString());
                                     nfex.printStackTrace();
+                                }
+                                catch (Exception ex) {
+                                    iFechaFaltantes = 0;
+                                    SetMessages(ex.toString());
+                                    ex.printStackTrace();
                                 }
                                 fechaconsignatarias.SetFaltantes(iFechaFaltantes);
                             }
@@ -1339,6 +1416,11 @@ public class CobradorConvertirView extends FrameView {
                                     iFechaValorUnitario = 0;
                                     SetMessages(nfex.toString());
                                     nfex.printStackTrace();
+                                }
+                                catch (Exception ex) {
+                                    iFechaValorUnitario = 0;
+                                    SetMessages(ex.toString());
+                                    ex.printStackTrace();
                                 }
                                 fechaconsignatarias.SetValorUnitario(iFechaValorUnitario);
                             }
